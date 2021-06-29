@@ -1,0 +1,59 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    
+}
+
+
+.cont{
+    width:100vw;
+    min-height:100vh;
+    display:flex;
+    background-image: url('/Users/ashutosh/Projects/KerasApp/static/neural.jpg');
+    background-position: center;
+    filter: brightness(70%);
+    position:relative
+    
+    
+    
+    
+}
+.det{
+    width:33%;
+    min-height:50vh;
+    margin-left:5%;
+    margin-top:20%;
+    background-color: rgba(14, 39, 119,0.6);
+    position:relative;
+    border-radius:15px;
+    padding:10px;
+    font-family: 'Open Sans', sans-serif;
+    
+    
+    
+}
+
+@media (max-width:700px){
+    .det{
+        width:50%;
+    }
+}
+
+
+
+.det h1{
+    color:white;
+    margin:4%;
+}
+.content{
+    margin:10px;
+    color:white;
+    width:90%;
+    height:60%;
+    font-size:18px;
+    line-height: 25px;
+    
+    
+}
+
