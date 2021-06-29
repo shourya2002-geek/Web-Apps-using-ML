@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+
+
+        .cont {
+            width: 100vw;
+            min-height: 100vh;
+            display: inline-flex;
+            background-image: url('static/images/neural.jpg');
+            background-position: center;
+            filter: brightness(70%);
+            position: relative;
+
+
+        }
+
+        .det1 {
+            width: 33%;
+            min-height: 50vh;
+            margin-left: 5%;
+            margin-top: 20%;
+            background-color: rgba(14, 39, 119, 0.6);
+            position: relative;
+            border-radius: 15px;
+            padding: 10px;
+            font-family: 'Open Sans', sans-serif;
+            animation: transitionIn 2s;
+
+        }
+
+        @media (max-width:700px) {
+            .det1 {
+                width: 50%;
+            }
+        }
+
+
+
+        .det1 h1 {
+            color: white;
+            margin: 4%;
+        }
+
+        .content1 {
+            margin: 10px;
+            color: white;
+            width: 90%;
+            height: 60%;
+            font-size: 18px;
+            line-height: 25px;
+
+
+        }
+
+        .det2 {
+            width: 33%;
+            height: 50vh;
+            margin-left: 25%;
+            margin-top: 15%;
+            background-color: rgba(14, 39, 119, 0.6);
+            position: relative;
+            border-radius: 15px;
+            padding: 10px;
+            font-family: 'Open Sans', sans-serif;
+            animation: transitionIn 0.75s;
+
+
+        }
+
+        .det2 p {
+            margin: 10px;
+            color: white;
+            font-size: 18px;
+            line-height: 25px;
+
+
+        }
+        @keyframes transitionIn {
+            from {
+                opacity: 0;
+                transform: rotateX(-10deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: rotateX(0);
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="cont">
+        <div class="det1">
+            <h1>Insights</h1>
+            <div class="content1">
+                <b>{{ prediction_text }}</b>
+                <p>This project endeavours to predict salary of a candidate,based on a given dataset of
+                    candidates,through sequential building of a machine learning Regression model.</p>
+                <p>The dataset comprises of <b>features</b>,such as candidates's <b>TestScore, Experience and Interview
+                        Rating.</b></p>
+                <p>Dataset analysis is done sequentially through practices such as <b>EDA,Feature Engineering,Feature
+                        Selection</b> and <b>Training of the model.</b></p>
+
+            </div>
+
+        </div>
+
+    </div>
+    
+    
+</body>
+
+</html>

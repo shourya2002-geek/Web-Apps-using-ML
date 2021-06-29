@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>ML API</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+
+        }
+
+        html {
+            font-size: calc(0.7rem + 1vw);
+        }
+
+        @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700;400&display=swap');
+
+        .btn {
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            padding: 4px 10px 4px;
+            margin-bottom: 0;
+            font-size: 13px;
+            line-height: 18px;
+            color: #333333;
+            text-align: center;
+            text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+            vertical-align: middle;
+            background-color: #f5f5f5;
+            background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+            background-image: -ms-linear-gradient(top, #ffffff, #e6e6e6);
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+            background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+            background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+            background-image: linear-gradient(top, #ffffff, #e6e6e6);
+            background-repeat: repeat-x;
+            filter: progid:dximagetransform.microsoft.gradient(startColorstr=#ffffff, endColorstr=#e6e6e6, GradientType=0);
+            border-color: #e6e6e6 #e6e6e6 #e6e6e6;
+            border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+            border: 1px solid #e6e6e6;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+            -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            *margin-left: .3em;
+        }
+
+        .btn:hover,
+        .btn:active,
+        .btn.active,
+        .btn.disabled,
+        .btn[disabled] {
+            background-color: #e6e6e6;
+        }
+
+        .btn-large {
+            padding: 9px 14px;
+            font-size: 15px;
+            line-height: normal;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            color: #333333;
+            text-decoration: none;
+            background-color: #e6e6e6;
+            background-position: 0 -15px;
+            -webkit-transition: background-position 0.1s linear;
+            -moz-transition: background-position 0.1s linear;
+            -ms-transition: background-position 0.1s linear;
+            -o-transition: background-position 0.1s linear;
+            transition: background-position 0.1s linear;
+        }
+
+        .btn-primary,
+        .btn-primary:hover {
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+            color: #ffffff;
+        }
+
+        .btn-primary.active {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .btn-primary {
+            background-color: #4a77d4;
+            background-image: -moz-linear-gradient(top, #6eb6de, #4a77d4);
+            background-image: -ms-linear-gradient(top, #6eb6de, #4a77d4);
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6eb6de), to(#4a77d4));
+            background-image: -webkit-linear-gradient(top, #6eb6de, #4a77d4);
+            background-image: -o-linear-gradient(top, #6eb6de, #4a77d4);
+            background-image: linear-gradient(top, #6eb6de, #4a77d4);
+            background-repeat: repeat-x;
+            filter: progid:dximagetransform.microsoft.gradient(startColorstr=#6eb6de, endColorstr=#4a77d4, GradientType=0);
+            border: 1px solid #3762bc;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-primary:hover,
+        .btn-primary:active,
+        .btn-primary.active,
+        .btn-primary.disabled,
+        .btn-primary[disabled] {
+            filter: none;
+            background-color: #4a77d4;
+        }
+
+        .btn-block {
+            width: 100%;
+            display: block;
+        }
+
+
+
+
+
+        .cont1 {
+            width: 100vw;
+            height: 100vh;
+            font-family: 'Open Sans', sans-serif;
+            color: #fff;
+            font-size: 18px;
+            text-align: center;
+            letter-spacing: 1.2px;
+            background-image: url('static/images/neural.jpg');
+            background-size: cover;
+            filter: brightness(70%);
+
+        }
+
+        .login {
+            position: relative;
+            margin-top: 16%;
+            margin-left: 10%;
+            width: 30%;
+            animation: transitionIn 0.75s;
+
+
+        }
+
+        .talkbubble {
+            width: 20%;
+            height: 20%;
+            position: "relative";
+            border-radius: 10%;
+            margin-left: 65%;
+            margin-top: -23%;
+            overflow: hidden;
+            color: white;
+            font: 18px;
+            display: flex;
+        }
+
+        .talkbubble p {
+            margin-top: 4%;
+            animation: transitionIn 0.7s;
+            font-size: 30px;
+        }
+
+        .talkbubble p spam {
+            margin-top: 4%;
+            animation: transitionIn 0.75s;
+        }
+
+
+
+
+
+        .login h1 {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        input {
+            width: 100%;
+            margin-bottom: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            outline: none;
+            padding: 10px;
+            font-size: 13px;
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2), 0 1px 1px rgba(255, 255, 255, 0.2);
+            -webkit-transition: box-shadow .5s ease;
+            -moz-transition: box-shadow .5s ease;
+            -o-transition: box-shadow .5s ease;
+            -ms-transition: box-shadow .5s ease;
+            transition: box-shadow .5s ease;
+        }
+
+        input:focus {
+            box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.4), 0 1px 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .myli {
+            margin: 5%;
+            text-transform: uppercase;
+            font-size: 1rem;
+
+            font-weight: 'lighter';
+
+        }
+
+        .pro {
+            font-size: 30px;
+            font-weight: 600;
+            outline: none;
+            text-decoration: none;
+            margin-left: 4%;
+            color: white;
+        }
+
+        .pro:hover {
+            color: #9bf0f0;
+            outline: none;
+            text-decoration: none;
+        }
+
+        .side {
+            font-size: 20px;
+            margin-left: 60%;
+        }
+
+        .mynav {
+            min-height: 18vh;
+        }
+
+        .myul {
+            margin-top: 1%;
+
+        }
+
+
+
+        .myli span:first-child {
+            color: white;
+            font-weight: 500
+        }
+
+        @keyframes transitionIn {
+            from {
+                opacity: 0;
+                transform: rotateX(-10deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: rotateX(0);
+            }
+
+        }
+
+        .icon {
+            position: absolute;
+            margin-top: -2.5%;
+            margin-left: -9%;
+        }
+
+        .sear {
+            width: 1rem;
+        }
+
+        .dat {
+            font-size: 40px;
+            font-family: 'Oswald', sans-serif;
+            color: white;
+        }
+
+        .bot {
+            outline: none;
+            border: none;
+        }
+    </style>
+
+
+
+
+
+</head>
+
+
+<body>
+    <div class="cont1">
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark mynav">
+            <a class="navbar-brand" href="#"><span class="dat">DatafyIt!</span></a>
+            <button class="navbar-toggler bot" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto myul">
+                    <li class="nav-item active myli">
+                        <a class="nav-link" href="{{ url_for('home')}}"><span>Home</span><span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item myli">
+                        <a class="nav-link"
+                            href="https://raw.githubusercontent.com/codebasics/py/master/ML/2_linear_reg_multivariate/Exercise/hiring.csv"
+                            target="_blank"><span>Dataset</span></a>
+                    </li>
+
+                    <li class="nav-item myli">
+                        <a class="nav-link" href="https://www.linkedin.com/in/shourya-gupta-80237b1b9/"
+                            target="_blank"><span>Contact</span></a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+
+
+
+
+
+        <div class="login">
+            <h1>Predict Salary Analysis</h1>
+
+            <form action="{{ url_for('predict')}}" method="post" id="myform">
+                <input type="text" name="experience" placeholder="Experience" required="required" />
+                <input type="text" name="test_score" placeholder="Test Score" required="required" />
+                <input type="text" name="interview_score" placeholder="Interview Score" required="required" />
+
+                <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+            </form>
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+
+    </div>
+    <script>
+        document.getElementById("navbarDropdown").addEventListener("click", function (event) {
+            event.preventDefault()
+        });
+        let btn = document.getElementById('bt');
+        let inputs = document.querySelectorAll('input');
+
+        btn.addEventListener('click', () => {
+            inputs.forEach(input => input.value = '')
+        });
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+        integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+        crossorigin="anonymous"></script>
+</body>
+
+
+
+
+</body>
+
+</html>
