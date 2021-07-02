@@ -3,20 +3,22 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import plotly.express as px
+import pickle
+
+
+
+
 
 
 def app():
-    uploaded_file = st.sidebar.file_uploader(label="Upload your csv or Excel file",type=['csv','xlsx'],key = "plot")
-    if uploaded_file is not None:
-        try:
-            df = pd.read_csv(uploaded_file)
+    
+    
+    uploaded_file = st.sidebar.file_uploader(label="Upload your csv or Excel file",type=['csv','xlsx'],key = "eda") 
+    if uploaded_file is not None:   
         
-        except Exception as e:
-        
-            df = pd.read_excel(uploaded_file)
+        df = pd.read_csv(uploaded_file)  
         lis = list(df.select_dtypes(['float','int']).columns) 
-        option = st.sidebar.selectbox(
-        'Select the target column for prediction',lis) 
+         
         if st.sidebar.checkbox("Avail Plots",False):
             chart_select = st.sidebar.selectbox(
             label="Select the chart type",
@@ -65,6 +67,7 @@ def app():
                     st.plotly_chart(plot)
 
                 except Exception as e:
-                    print(e)   
-        
+                    print(e)  
+    else:
+        st.write("Please upload the dataset as a csv or an excel file")                 
         

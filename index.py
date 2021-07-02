@@ -2,8 +2,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from multiapp import MultiApp
-from apps import Plot, EDA
-
+from apps import Plot, EDA, Models, Main
+import pickle
+import os
 
 hide_footer_style = """
 <style>
@@ -19,38 +20,22 @@ footer {visibility: hidden;}
 
 
 
-st.title("Data Visualization App")
 
-st.sidebar.header("Visualization Settings")
 
-uploaded_file = st.sidebar.file_uploader(label="Upload your csv or Excel file",type=['csv','xlsx'],key = "index")
+st.title("Data Analysis App")
 
-global df
+st.sidebar.header("Analytical Settings")
 
-if uploaded_file is not None:
-    
-    
-    try:
-        df = pd.read_csv(uploaded_file)
-        
-    except Exception as e:
-        
-        df = pd.read_excel(uploaded_file)
 
-    try:
-        if st.sidebar.checkbox("Show dataset",False):
-            st.write(df) 
-            
-            
-    except Exception as e:
-        
-        st.write("Please upload the dataset as a csv or an excel file")
+app = MultiApp()   
 
-    app = MultiApp()   
-    app.add_app("Plots", Plot.app)
-    app.add_app("Exploratory Data Analysis", EDA.app)
-    
-    app.run() 
+app.add_app("Show Raw Dataset",Main.app)
+app.add_app("Exploratory Data Analysis", EDA.app)
+app.add_app("Plots", Plot.app)
+app.add_app("Model Training", Models.app)
+
+
+app.run() 
                         
   
 
