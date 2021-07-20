@@ -1,0 +1,27 @@
+if st.sidebar.checkbox("Show Tokens and Lemma"):
+		st.subheader("Tokenize Your Text")
+
+		
+		if st.button("Analyze"):
+			nlp_result = text_analyzer(st.session_state)
+			st.json(nlp_result)
+
+	if st.checkbox("Show Text Summarization"):
+		st.subheader("Summarize Your Text")
+
+		message = st.text_area("Enter Text","Type Here ..")
+		summary_options = st.selectbox("Choose Summarizer",['sumy','gensim'])
+		if st.button("Summarize"):
+			if summary_options == 'sumy':
+				st.text("Using Sumy Summarizer ..")
+				summary_result = sumy_summarizer(st.session_state)
+			elif summary_options == 'gensim':
+				st.text("Using Gensim Summarizer ..")
+				summary_result = summarize(message)
+			else:
+				st.warning("Using Default Summarizer")
+				st.text("Using Gensim Summarizer ..")
+				summary_result = summarize(z)
+
+		
+			st.success(summary_result)	
