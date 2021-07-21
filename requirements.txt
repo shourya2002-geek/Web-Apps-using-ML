@@ -139,7 +139,7 @@ nest-asyncio==1.4.1
 numba==0.48.0
 
 opt-einsum==3.3.0
-packaging==20.4
+
 
 pandocfilters==1.4.2
 parso==0.7.1
