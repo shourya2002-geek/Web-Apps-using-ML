@@ -86,7 +86,6 @@ numpy==1.19.4
 opencv-python==4.5.2.54
 packaging==20.8
 pandas==1.2.4
-pandas-profiling==3.0.0
 pandocfilters==1.4.3
 parso==0.8.1
 pathy==0.6.0
