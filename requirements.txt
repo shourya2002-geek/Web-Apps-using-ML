@@ -140,7 +140,7 @@ numba==0.48.0
 
 opt-einsum==3.3.0
 
-
+portaudio==19.7.0
 pandocfilters==1.4.2
 parso==0.7.1
 pathtools==0.1.2
