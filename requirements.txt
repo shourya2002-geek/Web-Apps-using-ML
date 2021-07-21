@@ -39,10 +39,6 @@ plotly==5.1.0
 plotly-express==0.4.1
 
 
-pyarrow==4.0.1
-PyAudio==0.2.11
-
-
 
 python-dotenv==0.18.0
 pyttsx3==2.90
